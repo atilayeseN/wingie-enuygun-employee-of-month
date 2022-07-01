@@ -1,0 +1,23 @@
+@import '../../../variables.scss';
+
+
+li {
+    display: flex;
+    background-color: #FFA500;
+    color: $dark-blue;
+    text-align: center;
+    padding: 1px;
+    margin: 10px;
+    width: 500px;
+    p {
+        flex: 2 1 auto;
+        cursor: pointer;
+    }
+    .pointBox{
+        width: 20px;
+        padding: 15px;
+        background-color: $light-pink;
+        text-align: center;
+        animation: $fade-animation;
+    }
+}

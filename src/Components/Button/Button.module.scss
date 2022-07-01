@@ -1,0 +1,13 @@
+@import '../../variables.scss';
+
+button {
+    background-color: #1F4690;
+    color: white;
+    padding: 5px;
+    border-style: solid;
+    border-color: $dark-blue;
+    cursor: pointer;
+}
+button:hover {
+    background-color: $dark-blue;
+}

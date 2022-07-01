@@ -1,0 +1,13 @@
+.modalContainer {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    border: 1vh;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto;
+    background-color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+  

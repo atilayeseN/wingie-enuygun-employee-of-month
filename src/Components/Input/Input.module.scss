@@ -1,0 +1,17 @@
+@import '../../variables.scss';
+
+form {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  background-color: #fefefe;
+  margin: 3% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  .checkboxConatiner {
+    border-style: groove;
+  }
+  animation: $fade-animation;
+}

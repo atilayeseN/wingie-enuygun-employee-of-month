@@ -1,0 +1,12 @@
+$dark-blue : #1F4690;
+$blue : #3A5BA0;
+$orange : #FFA500;
+$light-pink : #FFE5B4;
+
+$fade-animation :  opening 0.5s;
+
+
+@keyframes opening {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
