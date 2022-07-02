@@ -1,15 +1,17 @@
 import { Formik, Form, Field } from "formik";
-import { newIdGenerator } from "../../helper";
 import Button from "../Button/Button";
 import styles from "./Input.module.scss";
 import { useDispatch } from "react-redux";
 import { addMember } from "../../store/members";
+import { postMember ,hello } from "../../Services/post";
 
 export default function Input({members , manageModal}) {
   const dispatch = useDispatch();
+  hello();
   return (
       <Formik
         initialValues={{
+          id : 0,
           name: "",
           surname: "",
           position: "",
@@ -19,14 +21,15 @@ export default function Input({members , manageModal}) {
           email: "",
           phone: "",
         }}
-        onSubmit={(values, actions) => {
-          values.id = newIdGenerator(members);
-          dispatch(addMember(values));
+        onSubmit={(values) => {
+          console.log(values);
+          // dispatch(addMember(values));
+          postMember(values);
           manageModal();
         }}
       >
-        {({ isSubmitting }) => (
-          <Form>
+        {({ isSubmitting,setFieldValue }) => (
+          <Form encType="multipart/form-data">
             <h1>Add Member</h1>
             <Field type="text" placeholder="Name" name="name" />
             <Field type="text" placeholder="Surname" name="surname" />
@@ -54,7 +57,9 @@ export default function Input({members , manageModal}) {
             <Field type="tel" placeholder = "Telephone" name="phone"></Field>
             <label>
               Select profile picture: 
-            <Field type="file" access = "image/*" name="picture"></Field>
+              <Field type = "file" name = "picture" onChange = {(event) => {
+                setFieldValue("file",event.target.files[0]);
+              }}></Field>
             </label>
             <Button type="submit" disabled={isSubmitting}>
               Save

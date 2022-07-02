@@ -13,6 +13,7 @@ function MemberList({ members }) {
   const manageModal = () => {
     setInfoModal(infoModal => !infoModal);
   }
+  
   const userModal = (e) => {
     setUserCard(e);
     setInfoModal(infoModal => !infoModal);
