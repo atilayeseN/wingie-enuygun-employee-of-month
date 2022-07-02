@@ -24,7 +24,7 @@ export default function Input({members , manageModal}) {
         onSubmit={(values) => {
           console.log(values);
           // dispatch(addMember(values));
-          postMember(values);
+          // postMember(values);
           manageModal();
         }}
       >
@@ -57,9 +57,11 @@ export default function Input({members , manageModal}) {
             <Field type="tel" placeholder = "Telephone" name="phone"></Field>
             <label>
               Select profile picture: 
-              <Field type = "file" name = "picture" onChange = {(event) => {
-                setFieldValue("file",event.target.files[0]);
-              }}></Field>
+              <input type = "file" onChange = {(event) => {
+                setFieldValue("picture",event.target.files[0]);
+              }}>
+
+              </input>
             </label>
             <Button type="submit" disabled={isSubmitting}>
               Save
