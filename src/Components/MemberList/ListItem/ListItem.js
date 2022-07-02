@@ -12,7 +12,7 @@ function ListItem({ listItem, memberModal,...props }) {
   return (
     <>
       <li {...props}>
-         <p onClick={() => memberModal(listItem)}><img src={listItem.picture} alt={listItem.picture}></img>{listItem.name} {listItem.surname}</p> <Button event={() => increasetPoint(listItem.id)} style = {{backgroundColor: "$blue"}}>Vote</Button>
+         <p onClick={() => memberModal(listItem)}><img src={listItem.picture}></img>{listItem.name} {listItem.surname}</p> <Button event={() => increasetPoint(listItem.id)} style = {{backgroundColor: "$blue"}}>Vote</Button>
          <div className={styles.pointBox}>{listItem.point}</div>
       </li>
     </>

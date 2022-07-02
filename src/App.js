@@ -1,29 +1,43 @@
-import './App.scss';
-import { useSelector } from "react-redux"
-import MemberList from './Components/MemberList/MemberList';
-import Button from './Components/Button/Button';
-import { useState } from 'react';
-import Modal from './Components/Modal/Modal';
-import Input from './Components/Input/Input';
+import "./App.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { setMembers } from "./store/members";
+import MemberList from "./Components/MemberList/MemberList";
+import Button from "./Components/Button/Button";
+import { useState } from "react";
+import Modal from "./Components/Modal/Modal";
+import Input from "./Components/Input/Input";
+import { getMembers } from "./Services/get";
 
 function App() {
-  const {members} = useSelector(state => state.members);
-  const [inputModalState,setinputModalState] = useState(false);
+  const { members } = useSelector((state) => state.members);
+  const [inputModalState, setinputModalState] = useState(false);
+
+  const dispatch = useDispatch();
 
   const manageModal = () => {
-    setinputModalState(modalState => !modalState)
-  }
+    setinputModalState((modalState) => !modalState);
+  };
 
+  useState(() => {
+    getMembers().then((e) => {
+      console.log(e);
+      dispatch(setMembers(e));
+    });
+  }, [members]);
 
   return (
-    <div className="App">    
+    <div className="App">
       <h1>EMPLOYEE OF MONTH</h1>
       <MemberList members={members}></MemberList>
-      
+
       <Button event={manageModal}>Add Member</Button>
-      {inputModalState && <Modal manageModal={manageModal}><Input manageModal={manageModal} members={members}></Input></Modal>}
+      {inputModalState && (
+        <Modal manageModal={manageModal}>
+          <Input manageModal={manageModal} members={members}></Input>
+        </Modal>
+      )}
     </div>
   );
 }
 
-export default App
+export default App;

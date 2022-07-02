@@ -1,32 +1,37 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  members: []
-}
+  members: [],
+};
 
 export const site = createSlice({
-  name: 'site',
+  name: "site",
   initialState,
   reducers: {
+    setMembers: (state, action) => {
+      state.members = action.payload;
+    },
     addMember: (state, action) => {
-      state.members = [...state.members,action.payload]
-      
+      state.members = [...state.members, action.payload];
     },
-    getMemberById: (state,action) => {
-      return action.payload
+    getMemberById: (state, action) => {
+      return action.payload;
     },
-    increasePoint: (state,action) => {
-      state.members = state.members.map(e => {
-        if (e.id === action.payload) {
-          e.point += 1
-        }
-        return e
-      }).sort((a,b) => {
-        return b.point - a.point;
-      })
-    }
+    increasePoint: (state, action) => {
+      state.members = state.members
+        .map((e) => {
+          if (e.id === action.payload) {
+            e.point += 1;
+          }
+          return e;
+        })
+        .sort((a, b) => {
+          return b.point - a.point;
+        });
+    },
   },
-})
+});
 
-export const { addMember , increasePoint,sortMembers } = site.actions
-export default site.reducer
+export const { setMembers, addMember, increasePoint, sortMembers } =
+  site.actions;
+export default site.reducer;
