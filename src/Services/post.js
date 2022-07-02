@@ -1,13 +1,10 @@
 function postMember(member) {
   const formData = new FormData();
-  formData.append("name", member.name);
-  formData.append("surname", member.surname);
-  formData.append("position", member.position);
-  formData.append("gender", member.gender);
-  formData.append("point", member.point);
-  formData.append("email", member.email);
-  formData.append("phone", member.phone);
-  formData.append("picture", member.file);
+  
+
+  for (let key in member) {
+    formData.append(key, member[key]);
+  }
 
   fetch("http://localhost:8000/api/save-member", {
   

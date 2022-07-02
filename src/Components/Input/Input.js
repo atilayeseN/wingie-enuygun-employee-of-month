@@ -1,30 +1,27 @@
 import { Formik, Form, Field } from "formik";
 import Button from "../Button/Button";
 import styles from "./Input.module.scss";
-import { useDispatch } from "react-redux";
-import { addMember } from "../../store/members";
 import { postMember ,hello } from "../../Services/post";
 
 export default function Input({members , manageModal}) {
-  const dispatch = useDispatch();
   hello();
   return (
       <Formik
         initialValues={{
-          id : 0,
           name: "",
           surname: "",
           position: "",
           gender: "",
-          picture: "",
+          file: "",
           point: 0,
           email: "",
+          picture: "",
           phone: "",
         }}
         onSubmit={(values) => {
           console.log(values);
           // dispatch(addMember(values));
-          // postMember(values);
+          postMember(values);
           manageModal();
         }}
       >
