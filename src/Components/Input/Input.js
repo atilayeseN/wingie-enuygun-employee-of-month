@@ -21,7 +21,7 @@ export default function Input({ members, manageModal }) {
       }}
       onSubmit={async (values) => {
         const newMember = await postMember(values);
-        queryClient.setQueryData("members", (old) => [...old,newMember]);
+        queryClient.setQueryData("members", (old) => [...old, newMember]);
 
         manageModal();
       }}
@@ -29,8 +29,8 @@ export default function Input({ members, manageModal }) {
       {({ isSubmitting, setFieldValue }) => (
         <Form encType="multipart/form-data">
           <h1>Add Member</h1>
-          <Field type="text" placeholder="Name" name="name" />
-          <Field type="text" placeholder="Surname" name="surname" />
+          <Field type="text" placeholder="Name" name="name" required />
+          <Field type="text" placeholder="Surname" name="surname" required />
           <div className={styles.checkboxConatiner}>
             <p>Choose Position</p>
             <label>
@@ -46,13 +46,18 @@ export default function Input({ members, manageModal }) {
               Solution architect
             </label>
           </div>
-          <Field component="select" name="gender">
+          <Field component="select" name="gender" required>
             <option>Choose Gender</option>
             <option value="1">Male</option>
             <option value="2">Female</option>
           </Field>
-          <Field type="email" placeholder="Email" name="email"></Field>
-          <Field type="tel" placeholder="Telephone" name="phone"></Field>
+          <Field type="email" placeholder="Email" name="email" required></Field>
+          <Field
+            type="tel"
+            placeholder="Telephone"
+            name="phone"
+            required
+          ></Field>
           <label>
             Select profile picture:
             <input
@@ -60,6 +65,7 @@ export default function Input({ members, manageModal }) {
               onChange={(event) => {
                 setFieldValue("picture", event.target.files[0]);
               }}
+              required
             ></input>
           </label>
           <Button type="submit" disabled={isSubmitting}>
