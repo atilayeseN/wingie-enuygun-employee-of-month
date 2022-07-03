@@ -56,7 +56,7 @@ export default function Input({ members, manageModal }) {
             type="tel"
             placeholder="Telephone"
             name="phone"
-            pattern="[0-9]" 
+            pattern="\d+" 
             required
           ></Field>
           <label>

@@ -1,6 +1,6 @@
 function increasetPoint(member) {
   const patchData = fetch(
-    "http://localhost:8000/api/update-user/" + member._id,
+    process.env.REACT_APP_ENDPOINTKEY + "/update-user/" + member._id,
     {
       method: "PATCH",
       body: JSON.stringify({
@@ -12,7 +12,7 @@ function increasetPoint(member) {
     }
   )
     .then((response) => response.json())
-    .then((response) => response)
+    .then((response) => {return response})
     .catch((err) => {
       console.log(err);
     });

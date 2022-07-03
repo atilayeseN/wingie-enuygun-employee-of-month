@@ -1,5 +1,5 @@
 async function getMembers() {
-  const memberData = await fetch("http://localhost:8000/api/get-members", {
+  const memberData = await fetch(process.env.REACT_APP_ENDPOINTKEY + "/get-members", {
     method: "GET",
   })
     .then((response) => response.json())

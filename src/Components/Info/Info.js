@@ -5,7 +5,7 @@ export default function Info({ member }) {
     <div className={style.userCard}>
       <img
         alt={member.picture}
-        src={"http://localhost:8000/api/get-image/" + member._id}
+        src={process.env.REACT_APP_ENDPOINTKEY + "/get-image/" + member._id}
       ></img>
       <h2>
         {member.name} {member.surname}

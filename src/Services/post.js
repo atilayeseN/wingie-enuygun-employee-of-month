@@ -5,7 +5,7 @@ function postMember(member) {
     formData.append(key, member[key]);
   }
 
-  const postData = fetch("http://localhost:8000/api/save-member", {
+  const postData = fetch(process.env.REACT_APP_ENDPOINTKEY + "/save-member", {
     method: "POST",
     body: formData,
   })
@@ -21,7 +21,7 @@ function postMember(member) {
 }
 
 function eventLog(message) {
-  const postData = fetch("http://localhost:8000/api/event-log", {
+  const postData = fetch(process.env.REACT_APP_ENDPOINTKEY + "/event-log", {
     method: "POST",
     body: JSON.stringify({
       name: message,

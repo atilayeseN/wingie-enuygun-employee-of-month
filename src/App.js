@@ -21,14 +21,12 @@ function App() {
     setinputModalState((modalState) => !modalState);
   };
 
-
+  
   if (isLoading) return ("LOADING");
   if (isError) return <pre>{error}</pre>;
   if (data) {
     dispatch(setMembers(data));
   }
-
-  
 
 
   return (

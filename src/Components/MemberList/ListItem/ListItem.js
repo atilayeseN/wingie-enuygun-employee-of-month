@@ -12,8 +12,8 @@ function ListItem({ listItem, memberModal, ...props }) {
     queryClient.setQueryData("members", (old) =>
       old
         .map((e) => {
-          if (e._id === updatedMember._id) {
-            e = updatedMember;
+          if (e._id === updatedMember.user._id) {
+            e = updatedMember.user;
           }
           return e;
         })
@@ -29,7 +29,7 @@ function ListItem({ listItem, memberModal, ...props }) {
       <li {...props}>
         <img
           alt={listItem.name + " " + listItem.surname}
-          src={"http://localhost:8000/api/get-image/" + listItem._id}
+          src={process.env.REACT_APP_ENDPOINTKEY + "/get-image/" + listItem._id}
         ></img>
         <p onClick={() => memberModal(listItem)}>
           {" "}
