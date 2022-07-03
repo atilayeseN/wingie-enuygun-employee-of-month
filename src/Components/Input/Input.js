@@ -1,10 +1,11 @@
 import { Formik, Form, Field } from "formik";
 import Button from "../Button/Button";
 import styles from "./Input.module.scss";
-import { postMember, hello } from "../../Services/post";
+import { useQueryClient } from "react-query";
+import { postMember } from "../../Services/post";
 
 export default function Input({ members, manageModal }) {
-  hello();
+  const queryClient = useQueryClient();
   return (
     <Formik
       initialValues={{
@@ -18,10 +19,10 @@ export default function Input({ members, manageModal }) {
         picture: "",
         phone: "",
       }}
-      onSubmit={(values) => {
-        console.log(values);
-        // dispatch(addMember(values));
-        postMember(values);
+      onSubmit={async (values) => {
+        const newMember = await postMember(values);
+        queryClient.setQueryData("members", (old) => [...old,newMember]);
+
         manageModal();
       }}
     >

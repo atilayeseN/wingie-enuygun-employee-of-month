@@ -6,16 +6,18 @@ function postMember(member) {
     formData.append(key, member[key]);
   }
 
-  fetch("http://localhost:8000/api/save-member", {
+  const postData = fetch("http://localhost:8000/api/save-member", {
   
     method: "POST",
     body: formData,
   })
     .then((response) => response.json())
-    .then((response) => console.log(response))
+    .then((response) => {return response})
     .catch((err) => {
       console.log(err);
     });
+
+    return postData;
 }
 
 async function hello() {

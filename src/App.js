@@ -7,10 +7,13 @@ import { useState } from "react";
 import Modal from "./Components/Modal/Modal";
 import Input from "./Components/Input/Input";
 import { getMembers } from "./Services/get";
+import { useQuery } from "react-query";
 
 function App() {
   const { members } = useSelector((state) => state.members);
   const [inputModalState, setinputModalState] = useState(false);
+
+  const { isLoading, isError, error, data } = useQuery("members", getMembers);
 
   const dispatch = useDispatch();
 
@@ -18,12 +21,15 @@ function App() {
     setinputModalState((modalState) => !modalState);
   };
 
-  useState(() => {
-    getMembers().then((e) => {
-      console.log(e);
-      dispatch(setMembers(e));
-    });
-  }, [members]);
+
+  if (isLoading) return "Loading";
+  if (isError) return <pre>{error}</pre>;
+  if (data) {
+    dispatch(setMembers(data));
+  }
+
+  
+
 
   return (
     <div className="App">
