@@ -4,6 +4,7 @@ import "./MemberList.module.scss";
 import Modal from "../Modal/Modal";
 import Info from "../Info/Info";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { eventLog } from "../../Services/post";
 
 function MemberList({ members }) {
   const [parent] = useAutoAnimate();
@@ -15,6 +16,7 @@ function MemberList({ members }) {
 
   const userModal = (e) => {
     setUserCard(e);
+    eventLog("Viewed info page:" + JSON.stringify(e));
     setInfoModal((infoModal) => !infoModal);
   };
   return (

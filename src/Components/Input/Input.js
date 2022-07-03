@@ -2,7 +2,7 @@ import { Formik, Form, Field } from "formik";
 import Button from "../Button/Button";
 import styles from "./Input.module.scss";
 import { useQueryClient } from "react-query";
-import { postMember } from "../../Services/post";
+import { postMember, eventLog } from "../../Services/post";
 
 export default function Input({ members, manageModal }) {
   const queryClient = useQueryClient();
@@ -22,7 +22,7 @@ export default function Input({ members, manageModal }) {
       onSubmit={async (values) => {
         const newMember = await postMember(values);
         queryClient.setQueryData("members", (old) => [...old, newMember]);
-
+        await eventLog("Added new member" + JSON.stringify(newMember));
         manageModal();
       }}
     >

@@ -2,6 +2,7 @@ import styles from "./ListItem.module.scss";
 import Button from "../../Button/Button";
 import { useQueryClient } from "react-query";
 import { increasetPoint } from "../../../Services/patch";
+import { eventLog } from "../../../Services/post";
 
 function ListItem({ listItem, memberModal, ...props }) {
   const queryClient = useQueryClient();
@@ -20,6 +21,7 @@ function ListItem({ listItem, memberModal, ...props }) {
           return b.point - a.point;
         })
     );
+    eventLog("Voted to:" + JSON.stringify(member));
   };
 
   return (
