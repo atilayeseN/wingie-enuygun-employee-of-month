@@ -6,18 +6,6 @@ import { postMember, eventLog } from "../../Services/post";
 
 export default function Input({ members, manageModal }) {
   const queryClient = useQueryClient();
-  const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
   return (
     <Formik
       initialValues={{
@@ -31,7 +19,6 @@ export default function Input({ members, manageModal }) {
         phone: "",
       }}
       onSubmit={async (values) => {
-        console.log(values);
         const newMember = await postMember(values);
         queryClient.setQueryData("members", (old) => [...old, newMember]);
         await eventLog("Added new member" + JSON.stringify(newMember));
@@ -77,8 +64,7 @@ export default function Input({ members, manageModal }) {
               type="file"
               accept=".jpeg, .png, .jpg"
               onChange={async (event) => {
-                const base64File = await convertToBase64(event.target.files[0]);
-                setFieldValue("picture",base64File);
+                setFieldValue("picture",event.target.files[0]);
               }}
               required
             ></input>
