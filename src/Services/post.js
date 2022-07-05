@@ -1,4 +1,5 @@
 function postMember(memberData) {
+  console.log(memberData);
 
   const postData = fetch(process.env.REACT_APP_ENDPOINTKEY + "/save-member", {
     method: "POST",
