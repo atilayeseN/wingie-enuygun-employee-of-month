@@ -1,13 +1,8 @@
-function postMember(member) {
-  const formData = new FormData();
-
-  for (let key in member) {
-    formData.append(key, member[key]);
-  }
+function postMember(memberData) {
 
   const postData = fetch(process.env.REACT_APP_ENDPOINTKEY + "/save-member", {
     method: "POST",
-    body: formData,
+    body: memberData,
   })
     .then((response) => response.json())
     .then((response) => {
