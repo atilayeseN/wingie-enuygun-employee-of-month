@@ -12,8 +12,8 @@ function ListItem({ listItem, memberModal, ...props }) {
     queryClient.setQueryData("members", (old) =>
       old
         .map((e) => {
-          if (e._id === updatedMember.user._id) {
-            e = updatedMember.user;
+          if (e._id === updatedMember._id) {
+            e = updatedMember;
           }
           return e;
         })
