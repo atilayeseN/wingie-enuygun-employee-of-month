@@ -3,6 +3,7 @@ import Button from "../Button/Button";
 import styles from "./Input.module.scss";
 import { useQueryClient } from "react-query";
 import { postMember, eventLog } from "../../Services/post";
+import { MemberScheme } from "../../Validation/Scheme";
 
 export default function Input({ members, manageModal }) {
   const queryClient = useQueryClient();
@@ -18,6 +19,7 @@ export default function Input({ members, manageModal }) {
         picture: "",
         phone: "",
       }}
+      validationSchema={MemberScheme}
       onSubmit={async (values) => {
         const newMember = await postMember(values);
         queryClient.setQueryData("members", (old) => [...old, newMember]);
@@ -25,11 +27,13 @@ export default function Input({ members, manageModal }) {
         manageModal();
       }}
     >
-      {({ isSubmitting, setFieldValue }) => (
+      {({ isSubmitting, setFieldValue, errors, touched }) => (
         <Form encType="multipart/form-data">
           <h1>Add Member</h1>
-          <Field type="text" placeholder="Name" name="name" required />
-          <Field type="text" placeholder="Surname" name="surname" required />
+          <Field type="text" placeholder="Name" name="name" />
+          {errors.name && touched.name ? <p>{errors.name}</p> : null}
+          <Field type="text" placeholder="Surname" name="surname" />
+          {errors.surname && touched.surname ? <p>{errors.surname}</p> : null}
           <div className={styles.checkboxConatiner}>
             <p>Choose Position</p>
             <label>
@@ -45,28 +49,27 @@ export default function Input({ members, manageModal }) {
               Solution architect
             </label>
           </div>
-          <Field component="select" name="gender" required>
+          <Field component="select" name="gender">
             <option>Choose Gender</option>
             <option value="1">Male</option>
             <option value="2">Female</option>
           </Field>
-          <Field type="email" placeholder="Email" name="email" required></Field>
+          <Field type="email" placeholder="Email" name="email"></Field>
+          {errors.email && touched.email ? <p>{errors.email}</p> : null}
           <Field
             type="tel"
             placeholder="Telephone"
             name="phone"
-            pattern="\d+" 
-            required
           ></Field>
+          {errors.phone && touched.phone ? <p>{errors.phone}</p> : null}
           <label>
             Select profile picture:
             <input
               type="file"
               accept=".jpeg, .png, .jpg"
               onChange={async (event) => {
-                setFieldValue("picture",event.target.files[0]);
+                await setFieldValue("picture", event.target.files[0]);
               }}
-              required
             ></input>
           </label>
           <Button type="submit" disabled={isSubmitting}>
