@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import members from "./members"
+import auth from "./auth"
 
 const store = configureStore({
   reducer: {
-    members
+    auth
   },
 })
 

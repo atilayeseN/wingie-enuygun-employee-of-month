@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  members: [],
+  token: "",
 };
 
 export const site = createSlice({
   name: "site",
   initialState,
   reducers: {
-    setMembers: (state, action) => {
-      state.members = action.payload;
+    setToken: (state, action) => {
+      state.token = action.payload;
     },
   },
 });
 
-export const { setMembers } =
+export const { setToken } =
   site.actions;
 export default site.reducer;

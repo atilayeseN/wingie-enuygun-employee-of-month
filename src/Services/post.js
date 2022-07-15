@@ -1,9 +1,9 @@
 function postMember(memberData) {
   var form_data = new FormData();
 
-for ( var key in memberData ) {
+  for (var key in memberData) {
     form_data.append(key, memberData[key]);
-}
+  }
 
   const postData = fetch(process.env.REACT_APP_ENDPOINTKEY + "/save-member", {
     method: "POST",
@@ -39,4 +39,19 @@ function eventLog(message) {
   return postData;
 }
 
-export { postMember, eventLog };
+function login(user) {
+  return fetch(process.env.REACT_APP_ENDPOINTKEY + "/login", {
+    method: "POST",
+    body: JSON.stringify(user),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((response) => response)
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+export { postMember, eventLog, login };
