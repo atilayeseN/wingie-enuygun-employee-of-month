@@ -1,5 +1,6 @@
 import Login from "../AuthPages/Login";
 import VoteApp from "../VoteApp";
+import PrivateRoute from "../Components/PrivateRoute";
 
 export const routes = [
   {
@@ -8,6 +9,10 @@ export const routes = [
   },
   {
     path: "/home",
-    element: <VoteApp />,
+    element: (
+      <PrivateRoute>
+        <VoteApp />
+      </PrivateRoute>
+    ),
   },
 ];

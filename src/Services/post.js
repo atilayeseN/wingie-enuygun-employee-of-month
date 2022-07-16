@@ -49,9 +49,29 @@ function login(user) {
   })
     .then((response) => response.json())
     .then((response) => response)
+    .catch((err) => {});
+}
+
+function verifyToken(token) {
+  return fetch(process.env.REACT_APP_ENDPOINTKEY + "verify", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      "x-access-token": token,
+    },
+  })
+    .then((response) => response)
+    .then((response) => {
+      if (response.status === 200) {
+        return true
+      }
+      else {
+        return false
+      }
+    })
     .catch((err) => {
       console.log(err);
     });
 }
 
-export { postMember, eventLog, login };
+export { postMember, eventLog, login, verifyToken };

@@ -1,20 +1,39 @@
 import { Formik, Field, Form } from "formik";
 import Button from "../Components/Button/Button";
-import { login } from "../Services/post";
-import { useNavigate } from "react-router-dom";
+import { login as loginService, verifyToken } from "../Services/post";
+import { login } from "../store/auth";
+import { useNavigate, Navigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 function Login() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [isAuth, setIsAuth] = useState();
+  const { user } = useSelector((state) => state.auth);
+  verifyToken(user.token).then((result) => {
+    if (result) {
+      setIsAuth(result);
+    }
+  });
+
+  if (isAuth) {
+    return <Navigate to="/home" replace={true} />;
+  }
+
   return (
     <>
       <h1>Login</h1>
       <Formik
-        initialValues={{ name: "", email: "" }}
+        initialValues={{ username: "", password: "" }}
         onSubmit={async (values) => {
-          const authResult = await login(values);
+          const authResult = await loginService(values);
           if (authResult) {
+            dispatch(login(authResult));
             navigate("/home", { replace: true });
           } else {
+            toast.error("Wrong password");
           }
         }}
       >
